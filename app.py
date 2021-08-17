@@ -11,6 +11,7 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
+from flask_migrate import Migrate
 from flask_wtf import Form
 from forms import *
 from models import Venue, Show, Artist, db, app
@@ -54,7 +55,7 @@ def index():
 
 @app.route('/venues')
 def venues():
-    datas = []
+    locals = []
     venues = Venue.query.all()
     places = Venue.query.distinct(Venue.city, Venue.state).all()
 
@@ -62,16 +63,10 @@ def venues():
         tmp_venues = []
         for venue in venues:
             if venue.city == place.city and venue.state == place.state:
-            tmp_venues.append({
-                'id': venue.id,
-                'name': venue.name
-            })
-    datas.append({
-        'city': place.city,
-        'state': place.state,
-        'venues': tmp_venues
-    })
-    return render_template('pages/venues.html', areas=datas)
+                tmp_venues.append({'id': venue.id, 'name': venue.name})
+        locals.append({'city': place.city, 'state': place.state,
+                      'venues': tmp_venues})
+    return render_template('pages/venues.html', areas=locals)
 
 
 @app.route('/venues/search', methods=['POST'])
