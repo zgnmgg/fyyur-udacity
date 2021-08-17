@@ -1,6 +1,8 @@
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+app = Flask(__name__)
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 
 class Show(db.Model):
     __tablename__ = 'Shows'
