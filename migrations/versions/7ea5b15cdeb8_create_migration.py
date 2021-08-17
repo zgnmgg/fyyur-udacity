@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 """create migration
 
 Revision ID: 7ea5b15cdeb8
@@ -5,11 +7,12 @@ Revises: 0aadf7496cba
 Create Date: 2021-08-17 12:51:29.079034
 
 """
+
 from alembic import op
 import sqlalchemy as sa
 
-
 # revision identifiers, used by Alembic.
+
 revision = '7ea5b15cdeb8'
 down_revision = '0aadf7496cba'
 branch_labels = None
@@ -17,7 +20,8 @@ depends_on = None
 
 
 def upgrade():
-    op.create_table('artists',
+    op.create_table(
+        'artists',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name', sa.String(), nullable=True),
         sa.Column('city', sa.String(length=120), nullable=True),
@@ -26,12 +30,15 @@ def upgrade():
         sa.Column('genres', sa.String(length=120), nullable=True),
         sa.Column('website', sa.String(length=120), nullable=True),
         sa.Column('image_link', sa.String(length=500), nullable=True),
-        sa.Column('facebook_link', sa.String(length=120), nullable=True),
+        sa.Column('facebook_link', sa.String(length=120),
+                  nullable=True),
         sa.Column('seeking_venue', sa.Boolean(), nullable=False),
-        sa.Column('seeking_description', sa.String(length=120), nullable=True),
-        sa.PrimaryKeyConstraint('id')
-    )
-        op.create_table('venues',
+        sa.Column('seeking_description', sa.String(length=120),
+                  nullable=True),
+        sa.PrimaryKeyConstraint('id'),
+        )
+    op.create_table(
+        'venues',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name', sa.String(), nullable=True),
         sa.Column('city', sa.String(length=120), nullable=True),
@@ -40,21 +47,24 @@ def upgrade():
         sa.Column('phone', sa.String(length=120), nullable=True),
         sa.Column('genres', sa.String(length=120), nullable=True),
         sa.Column('image_link', sa.String(length=500), nullable=True),
-        sa.Column('facebook_link', sa.String(length=120), nullable=True),
+        sa.Column('facebook_link', sa.String(length=120),
+                  nullable=True),
         sa.Column('website', sa.String(length=120), nullable=True),
         sa.Column('seeking_talent', sa.Boolean(), nullable=False),
-        sa.Column('seeking_description', sa.String(length=120), nullable=True),
-        sa.PrimaryKeyConstraint('id')
-    )
-        op.create_table('shows',
+        sa.Column('seeking_description', sa.String(length=120),
+                  nullable=True),
+        sa.PrimaryKeyConstraint('id'),
+        )
+    op.create_table(
+        'shows',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('artist_id', sa.Integer(), nullable=False),
         sa.Column('venue_id', sa.Integer(), nullable=False),
         sa.Column('start_time', sa.DateTime(), nullable=False),
-        sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ),
-        sa.ForeignKeyConstraint(['venue_id'], ['venues.id'], ),
-        sa.PrimaryKeyConstraint('id')
-    )
+        sa.ForeignKeyConstraint(['artist_id'], ['artists.id']),
+        sa.ForeignKeyConstraint(['venue_id'], ['venues.id']),
+        sa.PrimaryKeyConstraint('id'),
+        )
 
 
 def downgrade():
