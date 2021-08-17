@@ -1,5 +1,11 @@
 from app import db
 
+Shows = db.Table("Shows",
+                 db.Column("id", db.Integer, primary_key=True),
+                 db.Column("artist_id", db.Integer, db.ForeignKey("Artist.id")),
+                 db.Column("venue_id", db.Integer, db.ForeignKey("Venue.id")),
+                 db.Column("start_time", db.DateTime, default=datetime.utcnow()))
+
 class Venue(db.Model):
     __tablename__ = 'Venue'
 
