@@ -74,7 +74,7 @@ def upgrade():
         sa.Column('venue_id', sa.Integer(), nullable=False),
         sa.Column('artist_id', sa.Integer(), nullable=False),
         sa.Column('start_time', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['artist_id'], ['Artist.id']),
+        sa.ForeignKeyConstraint(['artist_id'], ['Artists.id']),
         sa.ForeignKeyConstraint(['venue_id'], ['Venue.id']),
         sa.PrimaryKeyConstraint('id'),
         )
@@ -85,7 +85,7 @@ def upgrade():
         sa.Column('venue_id', sa.Integer(), nullable=False),
         sa.Column('artist_id', sa.Integer(), nullable=False),
         sa.Column('start_time', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['artist_id'], ['Artist.id']),
+        sa.ForeignKeyConstraint(['artist_id'], ['Artists.id']),
         sa.ForeignKeyConstraint(['venue_id'], ['Venue.id']),
         sa.PrimaryKeyConstraint('id'),
         )
